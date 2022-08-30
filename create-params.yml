@@ -27,6 +27,9 @@
        - {key: "mutable.user.dev.MONGO", value: "true"}
        - {key: "mutable.user.dev.REDIS_HOST", value: "redis-dev.roboshop.internal"}
        - {key: "mutable.user.dev.MONGO_URL", value: "mongodb://mongodb-dev.roboshop.internal:27017/users"}
+       - { key: "mutable.dispatch.dev.AMQP_HOST", value: "rabbitmq-dev.roboshop.internal" }
+       - { key: "mutable.dispatch.dev.AMQP_USER", value: "roboshop" }
+       - { key: "mutable.dispatch.dev.AMQP_PASS", value: "roboshop123" }
 
 
 
