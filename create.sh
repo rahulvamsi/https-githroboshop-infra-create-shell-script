@@ -11,11 +11,11 @@ COMPONENT=all
 create_ec2() {
   PRIVATE_IP=$(aws ec2 run-instances \
       --image-id ${AMI_ID} \
-      --instance-type t3.micro \
-      --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=${COMPONENT}}, {Key=Monitor,Value=Yes}]"  \
+      --instance-type t2.micro \
+      --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=${COMPONENT}},{Key=Monitor,Value=Yes}]" \
       --instance-market-options "MarketType=spot,SpotOptions={SpotInstanceType=persistent,InstanceInterruptionBehavior=stop}"\
       --security-group-ids ${SGID} \
-      --iam-instance-profile Name=SecretManager_Role_for_RoboShop_Nodes \
+      --iam-instance-profile Name=secret_role_roboshop \
       | jq '.Instances[].PrivateIpAddress' | sed -e 's/"//g')
 
   sed -e "s/IPADDRESS/${PRIVATE_IP}/" -e "s/COMPONENT/${COMPONENT}/" route53.json >/tmp/record.json
